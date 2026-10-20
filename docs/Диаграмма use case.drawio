@@ -1,0 +1,91 @@
+<mxfile host="Electron">
+  <diagram name="Страница-1" id="m7HUXG1waCy6L8xQyMon">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ByDy7oWMagT6mmeliIrR-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Пользователь" vertex="1">
+          <mxGeometry height="60" width="30" x="110" y="318" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-2" parent="1" style="swimlane;startSize=0;" value="" vertex="1">
+          <mxGeometry height="590" width="820" x="210" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-3" parent="ByDy7oWMagT6mmeliIrR-2" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Система для фиксации дефектов&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="260" x="280" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-4" parent="ByDy7oWMagT6mmeliIrR-2" style="ellipse;whiteSpace=wrap;html=1;" value="Нажать на иконку камеры" vertex="1">
+          <mxGeometry height="70" width="140" x="23" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-8" parent="ByDy7oWMagT6mmeliIrR-2" style="ellipse;whiteSpace=wrap;html=1;" value="Сделать фото дефекта" vertex="1">
+          <mxGeometry height="70" width="145" x="206" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-9" edge="1" parent="ByDy7oWMagT6mmeliIrR-2" source="ByDy7oWMagT6mmeliIrR-8" style="html=1;verticalAlign=bottom;endArrow=classic;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;" target="ByDy7oWMagT6mmeliIrR-4" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="41" y="80" as="sourcePoint" />
+            <mxPoint x="-39" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-10" parent="ByDy7oWMagT6mmeliIrR-2" style="ellipse;whiteSpace=wrap;html=1;" value="Ввести необходимые данные" vertex="1">
+          <mxGeometry height="70" width="140" x="361" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-11" edge="1" parent="ByDy7oWMagT6mmeliIrR-2" source="ByDy7oWMagT6mmeliIrR-10" style="html=1;verticalAlign=bottom;endArrow=classic;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;" target="ByDy7oWMagT6mmeliIrR-8" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="303" as="sourcePoint" />
+            <mxPoint x="311" y="311" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-12" parent="ByDy7oWMagT6mmeliIrR-2" style="ellipse;whiteSpace=wrap;html=1;" value="Ввести данные голосом" vertex="1">
+          <mxGeometry height="70" width="140" x="281" y="431" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-13" parent="ByDy7oWMagT6mmeliIrR-2" style="ellipse;whiteSpace=wrap;html=1;" value="Ввести данные вручную" vertex="1">
+          <mxGeometry height="70" width="140" x="501" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-15" edge="1" parent="ByDy7oWMagT6mmeliIrR-2" source="ByDy7oWMagT6mmeliIrR-13" style="html=1;verticalAlign=bottom;endArrow=classic;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;" target="ByDy7oWMagT6mmeliIrR-10" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="582" as="sourcePoint" />
+            <mxPoint x="391" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-14" edge="1" parent="ByDy7oWMagT6mmeliIrR-2" source="ByDy7oWMagT6mmeliIrR-12" style="html=1;verticalAlign=bottom;endArrow=classic;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;" target="ByDy7oWMagT6mmeliIrR-10" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="652" as="sourcePoint" />
+            <mxPoint x="231" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-16" parent="ByDy7oWMagT6mmeliIrR-2" style="ellipse;whiteSpace=wrap;html=1;" value="Сохранить запись" vertex="1">
+          <mxGeometry height="70" width="140" x="450" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-17" edge="1" parent="ByDy7oWMagT6mmeliIrR-2" source="ByDy7oWMagT6mmeliIrR-16" style="html=1;verticalAlign=bottom;endArrow=classic;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;" target="ByDy7oWMagT6mmeliIrR-10" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="699" y="284" as="sourcePoint" />
+            <mxPoint x="611" y="263" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-20" parent="ByDy7oWMagT6mmeliIrR-2" style="ellipse;whiteSpace=wrap;html=1;" value="Удалить запись" vertex="1">
+          <mxGeometry height="70" width="140" x="544" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-21" parent="ByDy7oWMagT6mmeliIrR-2" style="ellipse;whiteSpace=wrap;html=1;" value="Редактировать запись" vertex="1">
+          <mxGeometry height="70" width="140" x="664" y="173" as="geometry" />
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-22" edge="1" parent="ByDy7oWMagT6mmeliIrR-2" source="ByDy7oWMagT6mmeliIrR-20" style="html=1;verticalAlign=bottom;endArrow=classic;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;" target="ByDy7oWMagT6mmeliIrR-16" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="548" y="160" as="sourcePoint" />
+            <mxPoint x="484" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-23" edge="1" parent="ByDy7oWMagT6mmeliIrR-2" source="ByDy7oWMagT6mmeliIrR-21" style="html=1;verticalAlign=bottom;endArrow=classic;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;" target="ByDy7oWMagT6mmeliIrR-16" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="698" y="290" as="sourcePoint" />
+            <mxPoint x="634" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ByDy7oWMagT6mmeliIrR-6" edge="1" parent="1" source="ByDy7oWMagT6mmeliIrR-1" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="ByDy7oWMagT6mmeliIrR-4" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="310" y="230" as="sourcePoint" />
+            <mxPoint x="360" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
