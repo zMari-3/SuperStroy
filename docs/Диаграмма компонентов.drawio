@@ -1,0 +1,18 @@
+<mxfile host="Electron">
+  <diagram name="Страница-1" id="lK2oPxe3oYlwYdtK5L3C">
+    <mxGraphModel dx="678" dy="593" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="dtXWCj1NKG18yq2gQiwb-1" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="&amp;laquo;Annotation&amp;raquo;&lt;br/&gt;&lt;b&gt;Component&lt;/b&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="260" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="dtXWCj1NKG18yq2gQiwb-2" parent="dtXWCj1NKG18yq2gQiwb-1" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
