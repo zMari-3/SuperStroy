@@ -1,0 +1,111 @@
+<mxfile host="Electron" agent="ChatGPT">
+  <diagram id="superstroy-components" name="Диаграмма компонентов">
+    <mxGraphModel dx="1852" dy="1444" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="presentation" parent="1" style="shape=folder;tabWidth=140;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;rounded=0;fillColor=light-dark(#ffffff, #151b23);strokeColor=#000000;strokeWidth=2;fontColor=#1e3a8a;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=38;" value="&lt;span&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;presentation · UI и состояние экранов&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="490" width="360" x="35" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="domain" parent="1" style="shape=folder;tabWidth=140;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;rounded=0;fillColor=light-dark(#ffffff, #0f1a13);strokeColor=light-dark(#000000, #699eff);strokeWidth=2;fontColor=#166534;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=38;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;domain · бизнес-логика&lt;/font&gt;" vertex="1">
+          <mxGeometry height="490" width="360" x="435" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="data" parent="1" style="shape=folder;tabWidth=140;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;rounded=0;fillColor=light-dark(#ffffff, #1e170f);strokeColor=light-dark(#000000, #d86515);strokeWidth=2;fontColor=#9a3412;fontSize=17;fontStyle=1;verticalAlign=top;spacingTop=38;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;data · источники данных и адаптеры&lt;/font&gt;" vertex="1">
+          <mxGeometry height="490" width="360" x="835" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="screens" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=#ffffff;strokeColor=light-dark(#000000, #326eb7);strokeWidth=1.5;fontColor=#0f172a;fontSize=13;" value="Compose UI&lt;br&gt;• Список дефектов&lt;br&gt;• Создание / редактирование&lt;br&gt;• Детали дефекта" vertex="1">
+          <mxGeometry height="90" width="300" x="65" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="viewmodels" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=#ffffff;strokeColor=light-dark(#000000, #326eb7);strokeWidth=1.5;fontColor=#0f172a;fontSize=13;" value="ViewModel + UiState&lt;br&gt;• Состояние экранов&lt;br&gt;• Валидация ввода&lt;br&gt;• Ошибки и статусы синхронизации" vertex="1">
+          <mxGeometry height="95" width="300" x="65" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="nav" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=#ffffff;strokeColor=light-dark(#000000, #326eb7);strokeWidth=1.5;fontColor=#0f172a;fontSize=13;" value="Навигация и DI&lt;br&gt;Hilt · Android app entry point" vertex="1">
+          <mxGeometry height="65" width="300" x="65" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="models" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=light-dark(#ffffff, #0f1a13);strokeColor=light-dark(#000000, #27a053);strokeWidth=1.5;fontColor=#14532d;fontSize=13;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Модели домена&lt;br&gt;Defect · ParsedCommand&lt;br&gt;DefectStatus · SyncStatus&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="300" x="465" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="usecases" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=light-dark(#ffffff, #0f1a13);strokeColor=light-dark(#000000, #27a053);strokeWidth=1.5;fontColor=#14532d;fontSize=13;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Use cases&lt;br&gt;CreateDefect · ParseVoiceCommand&lt;br&gt;CloseDefect · SyncDefects&lt;br&gt;GetDefectById&lt;/font&gt;" vertex="1">
+          <mxGeometry height="115" width="300" x="465" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="contracts" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=light-dark(#ffffff, #0f1a13);strokeColor=light-dark(#000000, #27a053);strokeWidth=1.5;fontColor=#14532d;fontSize=13;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Контракты / интерфейсы&lt;br&gt;DefectRepository · PhotoStorage&lt;br&gt;LocationProvider · SpeechRecognizer&lt;br&gt;VoiceCommandParser&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="300" x="465" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="repo" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=light-dark(#ffffff, #1e170f);strokeColor=light-dark(#000000, #d86515);strokeWidth=1.5;fontColor=#7c2d12;fontSize=13;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Реализации репозиториев&lt;br&gt;RoomDefectRepository&lt;br&gt;SupabaseDefectRepository / API DTO&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="300" x="865" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="local" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=light-dark(#ffffff, #1e170f);strokeColor=light-dark(#000000, #d86515);strokeWidth=1.5;fontColor=#7c2d12;fontSize=13;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Локальное хранилище&lt;br&gt;Room database + фото&lt;br&gt;Очередь офлайн-синхронизации&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="300" x="865" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="adapters" parent="1" style="shape=component;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;rounded=1;fillColor=light-dark(#ffffff, #1e170f);strokeColor=light-dark(#000000, #d86515);strokeWidth=1.5;fontColor=#7c2d12;fontSize=13;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Адаптеры платформы&lt;br&gt;CameraX · FusedLocationProvider&lt;br&gt;SpeechRecognizer ·&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;мапперы DTO ↔ Model&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="95" width="300" x="865" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="supabase" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;strokeWidth=1.5;dashed=1;fontColor=#334155;fontSize=13;" value="Supabase&lt;br&gt;Postgres · Storage · Edge Functions" vertex="1">
+          <mxGeometry height="75" width="210" x="850" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="stt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;strokeWidth=1.5;dashed=1;fontColor=#334155;fontSize=13;" value="Внешний STT API&lt;br&gt;вызывается через Edge Function" vertex="1">
+          <mxGeometry height="75" width="220" x="1100" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="android" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;strokeWidth=1.5;dashed=1;fontColor=#334155;fontSize=13;" value="Android-устройство&lt;br&gt;Камера · GPS · сеть" vertex="1">
+          <mxGeometry height="75" width="210" x="560" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="screens" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=light-dark(#000000, #699eff);strokeWidth=2;" target="viewmodels" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="viewmodels" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=light-dark(#000000, #699eff);strokeWidth=2;" target="usecases" value="вызовы сценариев">
+          <mxGeometry relative="1" x="0.0476" y="18" as="geometry">
+            <mxPoint x="18" y="-18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="usecases" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=2;" target="contracts" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="repo" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=2;" target="contracts" value="реализация интерфейсов">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="240" />
+              <mxPoint x="810" y="430" />
+              <mxPoint x="615" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="local" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1.5;" target="repo" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="adapters" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1.5;" target="contracts" value="реализация интерфейсов">
+          <mxGeometry relative="1" x="-0.0632" y="-15" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="815" y="440" />
+              <mxPoint x="815" y="468" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="repo" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748b;strokeWidth=1.5;dashed=1;" target="supabase" value="HTTPS / JSON">
+          <mxGeometry relative="1" x="0.2593" y="-5" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1250" y="240" />
+              <mxPoint x="1250" y="660" />
+              <mxPoint x="955" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="supabase" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748b;strokeWidth=1.5;dashed=1;" target="stt" value="вызов распознавания">
+          <mxGeometry relative="1" y="-52" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="adapters" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748b;strokeWidth=1.5;dashed=1;" target="android" value="CameraX / GPS / Speech">
+          <mxGeometry relative="1" x="0.2236" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="820" y="468" />
+              <mxPoint x="820" y="728" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
