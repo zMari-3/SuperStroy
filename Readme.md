@@ -64,4 +64,5 @@ Android-приложение на Kotlin для быстрой записи ст
 Пакеты организованы по слоям архитектуры, а не по типу экрана — это подчеркивает границы между Domain, Data и Presentation и упрощает навигацию по проекту при его росте
 
 
-Ссылка на Figma https://www.figma.com/design/MLXaX4J5Nux4S2Wz14dt7z/Untitled?node-id=0-1
+
+Ссылка на Figma https://www.figma.com/design/MLXaX4J5Nux4S2Wz14dt7z/Untitled?node-id=13-2&p=f&t=S9liRHWBoclcyh2Y-0
