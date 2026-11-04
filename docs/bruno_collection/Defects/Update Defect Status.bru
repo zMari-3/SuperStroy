@@ -1,0 +1,22 @@
+meta {
+  name: Update Defect Status
+  type: http
+  seq: 3
+}
+
+patch {
+  url: {{supabaseUrl}}/rest/v1/defects?id=eq.550e8400-e29b-41d4-a716-446655440000
+  body: json
+  auth: none
+}
+
+headers {
+  apikey: {{supabaseKey}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "status": "CLOSED"
+  }
+}

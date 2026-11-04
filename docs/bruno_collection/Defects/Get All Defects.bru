@@ -1,0 +1,15 @@
+meta {
+  name: Get All Defects
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{supabaseUrl}}/rest/v1/defects?select=*
+  body: none
+  auth: none
+}
+
+headers {
+  apikey: {{supabaseKey}}
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Recognize Speech
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{supabaseUrl}}/functions/v1/recognize-speech
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{supabaseKey}}
+}
+
+body:multipart-form {
+  audio: @file(C:\work\Mogilka\mobdead\test_audio.m4a) @contentType(audio/mp4)
+}

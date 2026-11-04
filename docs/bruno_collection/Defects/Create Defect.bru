@@ -1,0 +1,26 @@
+meta {
+  name: Create Defect
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{supabaseUrl}}/rest/v1/defects
+  body: json
+  auth: none
+}
+
+headers {
+  apikey: {{supabaseKey}}
+  Content-Type: application/json
+  Prefer: return=representation
+}
+
+body:json {
+  {
+    "title": "Трещина в стене",
+    "assignee": "Иванов С.А.",
+    "due_date": "2026-05-20",
+    "status": "OPEN"
+  }
+}

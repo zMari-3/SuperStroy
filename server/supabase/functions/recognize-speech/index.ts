@@ -7,7 +7,25 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+function errorResponse(status: number, message: string, code: string): Response {
+  return new Response(
+    JSON.stringify({
+      error: message,
+      code: code,
+      timestamp: new Date().toISOString(),
+    }),
+    {
+      status,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    }
+  );
+}
+
 Deno.serve(async (req) => {
+
+  // Лог входящего запроса
+  console.log(`[${new Date().toISOString()}] Incoming request: ${req.method} ${req.url}`);
+
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
@@ -17,11 +35,25 @@ Deno.serve(async (req) => {
     const audioFile = formData.get('audio') as File;
 
     if (!audioFile) {
-      return new Response(JSON.stringify({ error: 'Файл не найден' }), {
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+      console.warn('Request rejected: no audio file provided');
+      return errorResponse(400, 'Файл не найден в запросе', 'MISSING_FILE');
     }
+
+    // Валидация размера 
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
+    if (audioFile.size > MAX_FILE_SIZE) {
+      console.warn(`Request rejected: file too large (${audioFile.size} bytes)`);
+      return errorResponse(413, 'Файл слишком большой, максимум 10 МБ', 'FILE_TOO_LARGE');
+    }
+
+    // Валидация типа файла
+    const allowedTypes = ['audio/m4a', 'audio/mp4', 'audio/mpeg', 'audio/wav', 'audio/webm'];
+    if (audioFile.type && !allowedTypes.includes(audioFile.type)) {
+      console.warn(`Request rejected: unsupported type (${audioFile.type})`);
+      return errorResponse(415, 'Неподдерживаемый формат файла', 'UNSUPPORTED_MEDIA_TYPE');
+    }
+
+    console.log(`Audio file received: ${audioFile.name}, size: ${audioFile.size} bytes, type: ${audioFile.type}`);
 
     const arrayBuffer = await audioFile.arrayBuffer();
 
@@ -91,9 +123,7 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    console.error('Function error:', error.message); 
+    return errorResponse(500, error.message || 'Внутренняя ошибка сервера', 'INTERNAL_ERROR');
   }
 });
