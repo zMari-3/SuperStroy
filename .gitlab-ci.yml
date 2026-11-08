@@ -30,14 +30,13 @@ deno-tests:
     - master
     - merge_requests
 
-# Запуск API-тестов Bruno
 bruno-tests:
   stage: test
   image: node:20
   script:
     - npm install -g @usebruno/cli
     - cd docs/bruno_collection
-    - bru run --env dev --env-var supabaseUrl=$SUPABASE_URL --env-var supabaseKey=$SUPABASE_KEY
+    - bru run --env dev
   only:
     - master
     - merge_requests
