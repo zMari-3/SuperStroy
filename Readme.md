@@ -65,6 +65,8 @@ Android-приложение на Kotlin для быстрой записи ст
 
 
 
-Ссылка на Figma https://www.figma.com/design/MLXaX4J5Nux4S2Wz14dt7z/Untitled?node-id=13-2&p=f&t=S9liRHWBoclcyh2Y-0
+Ссылка на Figma: https://www.figma.com/design/MLXaX4J5Nux4S2Wz14dt7z/Untitled?node-id=13-2&p=f&t=S9liRHWBoclcyh2Y-0
 
-Ссылка на прототип приложения https://www.figma.com/design/MLXaX4J5Nux4S2Wz14dt7z/Untitled?node-id=19-2
+Ссылка на прототип приложения: https://www.figma.com/design/MLXaX4J5Nux4S2Wz14dt7z/Untitled?node-id=19-2
+
+URL работающего сервера: https://aqmvyfkpbvyrukuxniup.supabase.co
