@@ -21,8 +21,7 @@ function errorResponse(status: number, message: string, code: string): Response 
   );
 }
 
-Deno.serve(async (req) => {
-
+export async function handler(req: Request) {
   // Лог входящего запроса
   console.log(`[${new Date().toISOString()}] Incoming request: ${req.method} ${req.url}`);
 
@@ -47,7 +46,7 @@ Deno.serve(async (req) => {
     }
 
     // Валидация типа файла
-    const allowedTypes = ['audio/m4a', 'audio/mp4', 'audio/mpeg', 'audio/wav', 'audio/webm'];
+    const allowedTypes = ['audio/m4a', 'audio/mp4', 'audio/mpeg', 'audio/wav', 'audio/webm', 'application/octet-stream'];
     if (audioFile.type && !allowedTypes.includes(audioFile.type)) {
       console.warn(`Request rejected: unsupported type (${audioFile.type})`);
       return errorResponse(415, 'Неподдерживаемый формат файла', 'UNSUPPORTED_MEDIA_TYPE');
@@ -122,8 +121,13 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ text: transcriptText }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
-  } catch (error) {
-    console.error('Function error:', error.message); 
-    return errorResponse(500, error.message || 'Внутренняя ошибка сервера', 'INTERNAL_ERROR');
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('Function error:', errorMessage); 
+    return errorResponse(500, errorMessage || 'Внутренняя ошибка сервера', 'INTERNAL_ERROR');
   }
-});
+}
+
+if (import.meta.main) {
+  Deno.serve(handler);
+}

@@ -17,3 +17,12 @@ headers {
 body:multipart-form {
   audio: @file(C:\work\Mogilka\mobdead\test_audio.m4a) @contentType(audio/mp4)
 }
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("Response has text field", function() {
+    expect(res.getBody().text).to.not.be.undefined;
+  });
+}

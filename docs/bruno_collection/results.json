@@ -1,0 +1,355 @@
+[
+  {
+    "iterationIndex": 0,
+    "results": [
+      {
+        "test": {
+          "filename": "AI\\Recognize Speech.bru"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://aqmvyfkpbvyrukuxniup.supabase.co/functions/v1/recognize-speech",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "bruno-runtime/4.3.0",
+            "Content-Length": "180388",
+            "Accept-Encoding": "gzip, compress, deflate, br",
+            "Host": "aqmvyfkpbvyrukuxniup.supabase.co",
+            "Connection": "keep-alive",
+            "apikey": "sb_publishable_Jc5pMDHzZI7iTY-3VW3L8w_vO6cF_6W",
+            "Authorization": "Bearer ********",
+            "content-type": "multipart/form-data; boundary=--------------------------14ab0c704306c5821c12a9d7"
+          },
+          "data": {
+            "_overheadLength": 156,
+            "_valueLength": 0,
+            "_valuesToMeasure": [
+              {
+                "fd": null,
+                "path": "C:\\work\\Mogilka\\mobdead\\test_audio.m4a",
+                "flags": "r",
+                "mode": 438,
+                "end": null,
+                "bytesRead": 180176,
+                "_events": {},
+                "_readableState": {
+                  "highWaterMark": 65536,
+                  "buffer": [],
+                  "bufferIndex": 0,
+                  "length": 0,
+                  "fastChunk": null,
+                  "pipeOnData": null,
+                  "pipePause": null,
+                  "pipes": [],
+                  "awaitDrainWriters": null
+                },
+                "_eventsCount": 2
+              }
+            ],
+            "writable": false,
+            "readable": true,
+            "dataSize": 0,
+            "maxDataSize": 2097152,
+            "pauseStreams": true,
+            "_released": true,
+            "_streams": [],
+            "_currentStream": null,
+            "_insideLoop": false,
+            "_pendingNext": false,
+            "_boundary": "--------------------------14ab0c704306c5821c12a9d7",
+            "_events": {},
+            "_eventsCount": 3
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Fri, 06 Nov 2026 07:27:09 GMT",
+            "content-type": "application/json",
+            "content-length": "127",
+            "connection": "keep-alive",
+            "cf-ray": "a5625fb77fa4e498-DME",
+            "cf-cache-status": "DYNAMIC",
+            "access-control-allow-origin": "*",
+            "server": "cloudflare",
+            "vary": "Accept-Encoding",
+            "access-control-allow-headers": "authorization, x-client-info, apikey, content-type",
+            "endpoint-load-metrics": "application_utilization:10,named_metrics.queue_depth:10",
+            "sb-gateway-version": "1",
+            "sb-project-ref": "aqmvyfkpbvyrukuxniup",
+            "sb-request-id": "01a1afc1-10b8-7c80-bc46-8a164b08e1d2",
+            "x-deno-execution-id": "5294ac86-f589-48a8-98b9-5b1fe7ea23d8",
+            "x-envoy-upstream-service-time": "1314",
+            "x-sb-edge-region": "eu-central-1",
+            "x-served-by": "supabase-edge-runtime",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+            "set-cookie": [
+              "__cf_bm=j9n71JzJsErGh8kBF2HAuZSDVDHR13ggsEWhQrMiO.A-1793950027.4432032-1.0.1.1-L.9avsoObxUEvAnNqT9cPNl0Ybzdf4b6Ukh7LShi3LJjzCafsO2n.zO0qfGjtPy6u9q0Ch8StYhIPhjrCUmDJjt8UC1DPe5x8Z0xLHIm.OSAArvUUJisJWlqxHUBFe_b; HttpOnly; SameSite=None; Secure; Path=/; Domain=supabase.co; Expires=Fri, 06 Nov 2026 07:57:09 GMT"
+            ],
+            "alt-svc": "h3=\":443\"; ma=86400"
+          },
+          "data": {
+            "text": "Трещина в несущей стене Бригадир Иванов Срок 25 мая"
+          },
+          "url": "https://aqmvyfkpbvyrukuxniup.supabase.co/functions/v1/recognize-speech",
+          "responseTime": 2762,
+          "duration": 2762,
+          "size": 103
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [],
+        "testResults": [
+          {
+            "description": "Status code is 200",
+            "status": "pass",
+            "uid": "LmnZOswa_qfnIcmR04fO9"
+          },
+          {
+            "description": "Response has text field",
+            "status": "pass",
+            "uid": "vUhp3YC-rnlWFCF1gutjB"
+          },
+          {
+            "description": "Status code is 200",
+            "status": "pass",
+            "uid": "ByUqMEi1P_FKM44KcnfXq"
+          },
+          {
+            "description": "Response has text field",
+            "status": "pass",
+            "uid": "NcUq31O8bFnL9ZtQxfU-1"
+          }
+        ],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 3.1451639,
+        "name": "Recognize Speech",
+        "suitename": "C:\\work\\Mogilka\\mobdead\\mobproect\\docs\\bruno_collection\\AI\\Recognize Speech",
+        "path": "AI\\Recognize Speech",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Defects\\Get All Defects.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "https://aqmvyfkpbvyrukuxniup.supabase.co/rest/v1/defects?select=*",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "bruno-runtime/4.3.0",
+            "Accept-Encoding": "gzip, compress, deflate, br",
+            "Host": "aqmvyfkpbvyrukuxniup.supabase.co",
+            "Connection": "keep-alive",
+            "apikey": "sb_publishable_Jc5pMDHzZI7iTY-3VW3L8w_vO6cF_6W",
+            "content-type": null
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Fri, 06 Nov 2026 07:27:10 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "2",
+            "connection": "keep-alive",
+            "content-range": "*/*",
+            "cf-ray": "a5625fc9e9e5f12a-DME",
+            "cf-cache-status": "DYNAMIC",
+            "content-location": "/defects?select=%2A",
+            "server": "cloudflare",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+            "x-content-type-options": "nosniff",
+            "content-profile": "public",
+            "sb-gateway-version": "1",
+            "sb-project-ref": "aqmvyfkpbvyrukuxniup",
+            "sb-request-id": "01a1afc1-1a42-73ec-a2dc-9e39fe3c0605",
+            "x-envoy-attempt-count": "1",
+            "x-envoy-upstream-service-time": "183",
+            "set-cookie": [
+              "__cf_bm=9slv4FaVY45NmEQIFjWz0zVNVnd7mFUtlsRrI5A2plg-1793950030.3915389-1.0.1.1-nga81fA46GnJAB5bv61IDp4c2jfHLhegMqpvKWqPHRArvgCI3Aig.Ohl_nTpzuUesScDWTseksfHo0f9OkDER47TXG0_jiK0dZNbbdZnWECBe2HgsiozLGIm1L.8e_Uc; HttpOnly; SameSite=None; Secure; Path=/; Domain=supabase.co; Expires=Fri, 06 Nov 2026 07:57:10 GMT"
+            ],
+            "alt-svc": "h3=\":443\"; ma=86400"
+          },
+          "data": [],
+          "url": "https://aqmvyfkpbvyrukuxniup.supabase.co/rest/v1/defects?select=*",
+          "responseTime": 785,
+          "duration": 785,
+          "size": 2
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.7889651,
+        "name": "Get All Defects",
+        "suitename": "C:\\work\\Mogilka\\mobdead\\mobproect\\docs\\bruno_collection\\Defects\\Get All Defects",
+        "path": "Defects\\Get All Defects",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Defects\\Create Defect.bru"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://aqmvyfkpbvyrukuxniup.supabase.co/rest/v1/defects",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "bruno-runtime/4.3.0",
+            "Content-Length": "130",
+            "Accept-Encoding": "gzip, compress, deflate, br",
+            "Host": "aqmvyfkpbvyrukuxniup.supabase.co",
+            "Connection": "keep-alive",
+            "apikey": "sb_publishable_Jc5pMDHzZI7iTY-3VW3L8w_vO6cF_6W",
+            "Content-Type": "application/json",
+            "Prefer": "return=representation"
+          },
+          "data": "{\n  \"title\": \"Трещина в стене\",\n  \"assignee\": \"Иванов С.А.\",\n  \"due_date\": \"2026-05-20\",\n  \"status\": \"OPEN\"\n}"
+        },
+        "response": {
+          "status": 400,
+          "statusText": "Bad Request",
+          "headers": {
+            "date": "Fri, 06 Nov 2026 07:27:11 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "cf-ray": "a5625fceedfaec39-DME",
+            "cf-cache-status": "DYNAMIC",
+            "server": "cloudflare",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+            "vary": "Accept-Encoding",
+            "proxy-status": "PostgREST; error=PGRST204",
+            "x-content-type-options": "nosniff",
+            "sb-gateway-version": "1",
+            "sb-project-ref": "aqmvyfkpbvyrukuxniup",
+            "sb-request-id": "01a1afc1-1d5e-7ffe-9ccd-12db35428c27",
+            "x-envoy-attempt-count": "1",
+            "x-envoy-upstream-service-time": "5",
+            "set-cookie": [
+              "__cf_bm=LyXTmW0mqqw9oqmlGbH3wh_B5_lsKYHZX32iGPWdG4Q-1793950031.1885078-1.0.1.1-pCIvrnb8Q83_gsFBNwtSyhyY0mX_gZ4NxoAYot3zZ3tHUUKbphXG6o4iHRAulazwfFL3LedGIN00BVaFzdJo9hd4IUgaOL3mr.l1ETVSl_2nsP4UIgXg2qT7AwY3eRZb; HttpOnly; SameSite=None; Secure; Path=/; Domain=supabase.co; Expires=Fri, 06 Nov 2026 07:57:11 GMT"
+            ],
+            "alt-svc": "h3=\":443\"; ma=86400"
+          },
+          "data": {
+            "code": "PGRST204",
+            "details": null,
+            "hint": null,
+            "message": "Could not find the 'assignee' column of 'defects' in the schema cache"
+          },
+          "url": "https://aqmvyfkpbvyrukuxniup.supabase.co/rest/v1/defects",
+          "responseTime": 442,
+          "duration": 442,
+          "size": 128
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.4468486,
+        "name": "Create Defect",
+        "suitename": "C:\\work\\Mogilka\\mobdead\\mobproect\\docs\\bruno_collection\\Defects\\Create Defect",
+        "path": "Defects\\Create Defect",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Defects\\Update Defect Status.bru"
+        },
+        "request": {
+          "method": "PATCH",
+          "url": "https://aqmvyfkpbvyrukuxniup.supabase.co/rest/v1/defects?id=eq.550e8400-e29b-41d4-a716-446655440000",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "bruno-runtime/4.3.0",
+            "Content-Length": "24",
+            "Accept-Encoding": "gzip, compress, deflate, br",
+            "Host": "aqmvyfkpbvyrukuxniup.supabase.co",
+            "Connection": "keep-alive",
+            "apikey": "sb_publishable_Jc5pMDHzZI7iTY-3VW3L8w_vO6cF_6W",
+            "Content-Type": "application/json"
+          },
+          "data": "{\n  \"status\": \"CLOSED\"\n}"
+        },
+        "response": {
+          "status": 400,
+          "statusText": "Bad Request",
+          "headers": {
+            "date": "Fri, 06 Nov 2026 07:27:11 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "cf-ray": "a5625fd15917f143-DME",
+            "cf-cache-status": "DYNAMIC",
+            "server": "cloudflare",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+            "vary": "Accept-Encoding",
+            "proxy-status": "PostgREST; error=22P02",
+            "x-content-type-options": "nosniff",
+            "sb-gateway-version": "1",
+            "sb-project-ref": "aqmvyfkpbvyrukuxniup",
+            "sb-request-id": "01a1afc1-1eea-77aa-80a9-be63af77e28e",
+            "x-envoy-attempt-count": "1",
+            "x-envoy-upstream-service-time": "33",
+            "set-cookie": [
+              "__cf_bm=KT6KMLajy.GdYphOJZXLF3.O1gKwD6pVoBQL3rWZy3I-1793950031.5804088-1.0.1.1-LOqxpl5.0AvOzpxGSn5Z6WIvZeTDGzPslRMfi0DBGcOQzQxELINYv43DLTOvfu__rcLeCvlC2nVHH3evCUDQQvVEKu.YXkDwE7ClcQBs08yytOcHEish0oCv5HCbAtZU; HttpOnly; SameSite=None; Secure; Path=/; Domain=supabase.co; Expires=Fri, 06 Nov 2026 07:57:11 GMT"
+            ],
+            "alt-svc": "h3=\":443\"; ma=86400"
+          },
+          "data": {
+            "code": "22P02",
+            "details": null,
+            "hint": null,
+            "message": "invalid input syntax for type integer: \"550e8400-e29b-41d4-a716-446655440000\""
+          },
+          "url": "https://aqmvyfkpbvyrukuxniup.supabase.co/rest/v1/defects?id=eq.550e8400-e29b-41d4-a716-446655440000",
+          "responseTime": 316,
+          "duration": 316,
+          "size": 135
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.3193592,
+        "name": "Update Defect Status",
+        "suitename": "C:\\work\\Mogilka\\mobdead\\mobproect\\docs\\bruno_collection\\Defects\\Update Defect Status",
+        "path": "Defects\\Update Defect Status",
+        "iterationIndex": 0
+      }
+    ],
+    "summary": {
+      "totalRequests": 4,
+      "passedRequests": 4,
+      "failedRequests": 0,
+      "errorRequests": 0,
+      "skippedRequests": 0,
+      "skippedByBail": 0,
+      "totalAssertions": 0,
+      "passedAssertions": 0,
+      "failedAssertions": 0,
+      "totalTests": 4,
+      "passedTests": 4,
+      "failedTests": 0,
+      "totalPreRequestTests": 0,
+      "passedPreRequestTests": 0,
+      "failedPreRequestTests": 0,
+      "totalPostResponseTests": 0,
+      "passedPostResponseTests": 0,
+      "failedPostResponseTests": 0
+    }
+  }
+]
