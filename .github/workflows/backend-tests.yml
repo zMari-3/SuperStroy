@@ -2,9 +2,9 @@ name: Backend Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master]
 
 jobs:
   test-edge-functions:
@@ -12,11 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Supabase CLI
-        uses: supabase/setup-cli@v1
-        with:
-          version: latest
-          
       - name: Setup Deno
         uses: denoland/setup-deno@v2
         with:
@@ -43,8 +38,7 @@ jobs:
         
       - name: Run Bruno API Tests
         run: |
-          cd docs/bruno_collection
-          bru run --env dev
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          cd docs/bruno_collection 
+          bru run --env dev \
+            --env-var supabaseUrl=${{ secrets.SUPABASE_URL }} \
+            --env-var supabaseKey=${{ secrets.SUPABASE_KEY }}
