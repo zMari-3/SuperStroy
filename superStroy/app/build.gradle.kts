@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
 android {
@@ -61,7 +62,8 @@ dependencies {
     implementation(libs.hilt.android)
 
     implementation(libs.hilt.lifecycle.viewmodel.compose)
-
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
     testImplementation(libs.mockk)
