@@ -8,14 +8,13 @@ import javax.inject.Inject
 class CloseDefectUseCase @Inject constructor(
     private val repository: DefectRepository
 ) {
-    //Unit = void
-    suspend operator fun invoke(defectId: String): Result<Unit>
+    suspend operator fun invoke(defectId: String): Boolean
     {
         return try {
             repository.changeStatus(defectId, DefectStatus.CLOSED)
-            Result.success(Unit)
-        }catch (e: Exception){
-            Result.failure(e)
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 }

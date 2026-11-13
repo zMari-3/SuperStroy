@@ -11,23 +11,19 @@ data class ParsedCommand(
 
 class ParseVoiceCommandUseCase @Inject constructor()
 {
-    suspend operator fun invoke(text: String): Result<ParsedCommand>
+    operator fun invoke(text: String): ParsedCommand?
     {
-        //Если строка пустая, вызываем исключение
-        if(text.isBlank())
-        {
-            return Result.failure(IllegalArgumentException("Текст пуст"))
-        }
         //Парсим строку
         return try {
             val parts = text.split(",").map { it.trim() }
-            val title = parts.toString()
-            val responsible = parts.toString()
-            val term = parts.toString()
 
-            Result.success(ParsedCommand(title, responsible, term))
-        }catch (e: Exception){
-            Result.failure(e)
+            val title = parts.getOrNull(0) ?: ""
+            val responsible = parts.getOrNull(1) ?: ""
+            val term = parts.getOrNull(2) ?: ""
+
+            ParsedCommand(title, responsible, term)
+        } catch (e: Exception) {
+            null
         }
 
     }

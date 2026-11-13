@@ -19,5 +19,5 @@ interface DefectRepository {
 
     suspend fun addCoverImage(defectId: String, sourceUri: String): String
     suspend fun changeStatus(defectId: String, status: DefectStatus)
-    suspend fun searchDefects(query: String): Flow<List<Defect>>
+    fun searchDefects(query: String): Flow<List<Defect>>
 }

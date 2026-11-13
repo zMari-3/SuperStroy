@@ -7,19 +7,12 @@ import javax.inject.Inject
 class GetDefectByIdUseCase @Inject constructor(
     private val repository: DefectRepository
 ) {
-    suspend operator fun invoke(id: String): Result<Defect>
+    suspend operator fun invoke(id: String): Any?
     {
         return try{
-            val defect = repository.getDefectById(id)
-            if (defect != null)
-            {
-                Result.success(defect)
-            }
-            else{
-                Result.failure(Exception("Дефект не найден"))
-            }
+            repository.getDefectById(id)
         }catch (e: Exception){
-            Result.failure(e)
+            null
         }
     }
 }

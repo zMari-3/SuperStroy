@@ -27,7 +27,7 @@ class CreateDefectUseCase @Inject constructor(
         responsible: String,
         term: LocalDate,
         tempPhotoUri: String?
-    ): Result<Defect>
+    ): Defect?
     {
         return try {
             val localPhotoPath = tempPhotoUri?.let {
@@ -47,8 +47,9 @@ class CreateDefectUseCase @Inject constructor(
                 status = DefectStatus.OPEN
             )
             repository.insert(defect)
+            defect
         }catch (e: Exception){
-            Result.failure<Unit>(e)
-        } as Result<Defect>
+            null
+        }
     }
 }
