@@ -35,7 +35,7 @@ class FakeDefectRepository : DefectRepository {
         }
     }
 
-    override fun getDefectById(id: String): Defect? {
+    override suspend fun getDefectById(id: String): Defect? {
         return defectsFlow.value.find { it.id == id }
     }
 

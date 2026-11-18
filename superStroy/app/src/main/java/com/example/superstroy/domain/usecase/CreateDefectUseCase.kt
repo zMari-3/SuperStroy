@@ -40,10 +40,10 @@ class CreateDefectUseCase @Inject constructor(
                 description = "",
                 responsible = responsible,
                 term = term,
-                created_date = LocalDateTime.now(),
+                createdDate = LocalDateTime.now(),
                 latitude = location?.latitude,
                 longitude = location?.longitude,
-                photo_url = localPhotoPath,
+                photoUrl = localPhotoPath,
                 status = DefectStatus.OPEN
             )
             repository.insert(defect)

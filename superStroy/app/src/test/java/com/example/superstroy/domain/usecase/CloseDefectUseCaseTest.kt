@@ -25,8 +25,8 @@ class CloseDefectUseCaseWithFakeTest {
     fun `Закрываем дефект меняя статус дефекта`() = runTest {
         val testDefect = Defect(
             id = "123", title = "Трещина", description = "", responsible = "Иванов",
-            term = LocalDate.now(), created_date = LocalDateTime.now(),
-            latitude = null, longitude = null, photo_url = null, status = DefectStatus.OPEN
+            term = LocalDate.now(), createdDate = LocalDateTime.now(),
+            latitude = null, longitude = null, photoUrl = null, status = DefectStatus.OPEN
         )
         fakeRepository.setDefects(listOf(testDefect))
 

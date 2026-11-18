@@ -1,5 +1,7 @@
 package com.example.superstroy.data.di
 
+import com.example.superstroy.data.repository.DefectRepositoryImpl
+import com.example.superstroy.domain.repository.DefectRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -9,7 +11,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-//    @Binds
-//    @Singleton
-//    abstract fun bindDefectRepository(impl: DefectRepositoryImpl): DefectRepository
+    @Binds
+    @Singleton
+    abstract fun bindDefectRepository(impl: DefectRepositoryImpl): DefectRepository
 }

@@ -10,10 +10,10 @@ data class Defect @OptIn(ExperimentalUuidApi::class) constructor(
     val description: String?,
     val responsible: String,
     val term: LocalDate,
-    val created_date: LocalDateTime,
+    val createdDate: LocalDateTime,
     val latitude: Double?,
     val longitude: Double?,
-    val photo_url: String?,
+    val photoUrl: String?,
     val status: DefectStatus
 )
 
