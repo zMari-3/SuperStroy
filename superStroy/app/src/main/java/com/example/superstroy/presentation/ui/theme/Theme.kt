@@ -16,9 +16,9 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryLight,
+    primary = PrimaryBlue,
     onPrimary = OnPrimaryLight,
-    primaryContainer = PrimaryContainerLight,
+    primaryContainer = LightBlueBottom,
     onPrimaryContainer = OnPrimaryContainerLight,
     background = BackgroundLight,
     onBackground = OnBackgroundLight,
@@ -46,8 +46,7 @@ private val DarkColorScheme = darkColorScheme(
 @Composable
 fun SuperStroyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Динамические цвета (Material You) - включены по умолчанию для Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

@@ -10,7 +10,7 @@ import javax.inject.Inject
 class SearchDefectsUseCase @Inject constructor(
     private val repository: DefectRepository
 ) {
-    suspend operator fun invoke(query: String): Flow<List<Defect>>
+    operator fun invoke(query: String): Flow<List<Defect>>
     {
         //Обрезаем всё лишнее в строке
         val tQuery = query.trim()

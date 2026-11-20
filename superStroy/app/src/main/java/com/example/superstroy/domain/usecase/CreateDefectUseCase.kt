@@ -20,8 +20,7 @@ class CreateDefectUseCase @Inject constructor(
     private val photoStorage: PhotoStorage
 )
 {
-    @RequiresApi(Build.VERSION_CODES.O)
-    @OptIn(ExperimentalUuidApi::class)
+
     suspend operator fun invoke(
         title: String,
         responsible: String,
@@ -41,8 +40,8 @@ class CreateDefectUseCase @Inject constructor(
                 responsible = responsible,
                 term = term,
                 createdDate = LocalDateTime.now(),
-                latitude = location?.latitude,
-                longitude = location?.longitude,
+                latitude = location.latitude,
+                longitude = location.longitude,
                 photoUrl = localPhotoPath,
                 status = DefectStatus.OPEN
             )

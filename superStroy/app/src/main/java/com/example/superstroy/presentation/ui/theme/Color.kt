@@ -3,14 +3,17 @@ package com.example.superstroy.presentation.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // --- Светлая тема ---
-val PrimaryLight = Color(0xFF0D54AE)
+
+val PrimaryBlue = Color(0xFF0D54AE)
+val LightBlueBottom = Color(0xFFE3EEFC)
 val OnPrimaryLight = Color(0xFFFFFFFF)
-val PrimaryContainerLight = Color(0xFFBFD7FF)
 val OnPrimaryContainerLight = Color(0xFF1862D4)
 
-val BackgroundLight = Color(0xFFF4F7FB)
-val OnBackgroundLight = Color(0xFF1A202C)
+val BackgroundLight = Color(0xFFF7FAFE)
 val SurfaceLight = Color(0xFFFFFFFF)
+
+val OutlineVariantLight = Color(0xFFE2E8F0)
+val OnBackgroundLight = Color(0xFF1A202C)
 val OnSurfaceLight = Color(0xFF1A202C)
 val SurfaceVariantLight = Color(0xFFDCE5F0)
 val OnSurfaceVariantLight = Color(0xFF6B7A90)

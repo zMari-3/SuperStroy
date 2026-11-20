@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetDefectByIdUseCase @Inject constructor(
     private val repository: DefectRepository
 ) {
-    suspend operator fun invoke(id: String): Any?
+    suspend operator fun invoke(id: String): Defect?
     {
         return try{
             repository.getDefectById(id)
