@@ -5,65 +5,83 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.superstroy.domain.usecase.CreateDefectUseCase
 import com.example.superstroy.domain.usecase.ParseVoiceCommandUseCase
+import com.example.superstroy.domain.usecase.ValidateDefectUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
 class NewDefectViewModel @Inject constructor(
     private val parseVoiceCommandUseCase: ParseVoiceCommandUseCase,
+    private val validateDefect: ValidateDefectUseCase,
+    private val createDefectUseCase: CreateDefectUseCase,
     savedStateHandle: SavedStateHandle // Получаем аргументы навигации
 ) : ViewModel() {
 
-    // Состояния полей формы
+
     var title by mutableStateOf("")
-        private set
     var description by mutableStateOf("")
-        private set
     var responsible by mutableStateOf("")
-        private set
     var term by mutableStateOf("")
-        private set
-    var geolocation by mutableStateOf("0.0, 0.0") // Заглушка для координат
-        private set
+    var geolocation by mutableStateOf("0.0, 0.0")
+    var errorMessage by mutableStateOf<String?>(null)
+    var isSaving by mutableStateOf(false)
 
     init {
-        // Получаем текст, переданный с экрана голосового ввода
         val voiceText = savedStateHandle.get<String>("voiceText") ?: ""
         if (voiceText.isNotBlank()) {
-            parseVoiceInput(voiceText)
+            val parsed = parseVoiceCommandUseCase(voiceText)
+            if (parsed != null) {
+                title = parsed.title
+                responsible = parsed.responsible
+                term = parsed.term
+            }
         }
     }
 
-    private fun parseVoiceInput(text: String) {
-        // Используем наш Use Case
-        val parsedResult = parseVoiceCommandUseCase(text)
+    fun onTitleChange(newTitle: String) { title = newTitle; errorMessage = null }
+    fun onDescriptionChange(newDesc: String) { description = newDesc }
+    fun onResponsibleChange(newResp: String) { responsible = newResp; errorMessage = null }
+    fun onTermChange(newTerm: String) { term = newTerm; errorMessage = null }
 
-        if (parsedResult != null) {
-            title = parsedResult.title
-            responsible = parsedResult.responsible
-            term = parsedResult.term
+    fun saveDefect(onSuccess: () -> Unit) {
+        //Валидация
+        val validationResult = validateDefect(title, responsible, term)
+        if (validationResult.isFailure) {
+            errorMessage = validationResult.exceptionOrNull()?.message
+            return
         }
-    }
 
-    // Методы для обновления полей, если пользователь вводит текст вручную
-    fun onTitleChange(newTitle: String) {
-        title = newTitle
-    }
+        //Сохранение
+        viewModelScope.launch {
+            isSaving = true
+            // Пытаемся распарсить дату
+            val parsedDate = try {
+                LocalDate.parse(term, DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            } catch (e: Exception) {
+                LocalDate.now()
+            }
 
-    fun onDescriptionChange(newDescription: String) {
-        description = newDescription
-    }
+            // Предполагаем, что координаты фиксированные (заглушка)
+            val result = createDefectUseCase(
+                title = title,
+                responsible = responsible,
+                term = parsedDate,
+                tempPhotoUri = null // Позже добавить сюда реальный Uri
+            )
 
-    fun onResponsibleChange(newResponsible: String) {
-        responsible = newResponsible
-    }
-
-    fun onTermChange(newTerm: String) {
-        term = newTerm
-    }
-
-    fun saveDefect() {
-        // Здесь в будущем будет вызов CreateDefectUseCase(title, responsible, ...)
+            isSaving = false
+            if (result != null) {
+                onSuccess()
+            } else {
+                errorMessage = "Не удалось сохранить дефект"
+            }
+        }
     }
 }
+

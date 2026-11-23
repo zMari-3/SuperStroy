@@ -80,9 +80,9 @@ fun NewDefectScreen(
             PrimaryButton(
                 text = "Сохранить",
                 onClick = {
-                    viewModel.saveDefect()
-                    onSaveClick()
+                    viewModel.saveDefect(onSaveClick)
                 },
+                enabled = !viewModel.isSaving,
                 modifier = Modifier.padding(bottom = Dimens.SpaceL)
             )
         }

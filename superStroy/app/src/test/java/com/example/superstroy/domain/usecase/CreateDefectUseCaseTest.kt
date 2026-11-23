@@ -24,7 +24,9 @@ class CreateDefectUseCaseTest {
     //Выполняем каждый раз, с новым состоянием для каждого теста
     @Before
     fun setUp() {
-        repository = mockk()
+        repository = mockk(relaxed = true)
+        locationProvider = mockk()
+        photoStorage = mockk()
         useCase = CreateDefectUseCase(repository, locationProvider, photoStorage)
     }
 

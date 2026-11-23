@@ -13,6 +13,7 @@ class ParseVoiceCommandUseCase @Inject constructor()
 {
     operator fun invoke(text: String): ParsedCommand?
     {
+        if (text.isBlank()) return null
         //Парсим строку
         return try {
             val parts = text.split(",").map { it.trim() }

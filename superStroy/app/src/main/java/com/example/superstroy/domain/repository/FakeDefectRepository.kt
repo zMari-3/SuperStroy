@@ -47,6 +47,10 @@ class FakeDefectRepository : DefectRepository {
 
     override suspend fun update(defect: Defect) {
         simulateNetwork()
+        // Проверяем, есть ли такой дефект
+        if (defectsFlow.value.none { it.id == defect.id }) {
+            throw NoSuchElementException("Дефект не найден")
+        }
         defectsFlow.update { currentList ->
             currentList.map { if (it.id == defect.id) defect else it }
         }
@@ -54,6 +58,9 @@ class FakeDefectRepository : DefectRepository {
 
     override suspend fun delete(defect: Defect) {
         simulateNetwork()
+        if (defectsFlow.value.none { it.id == defect.id }) {
+            throw NoSuchElementException("Дефект не найден")
+        }
         defectsFlow.update { currentList ->
             currentList.filterNot { it.id == defect.id }
         }
