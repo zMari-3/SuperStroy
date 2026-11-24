@@ -10,7 +10,7 @@ import org.junit.Test
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class CloseDefectUseCaseWithFakeTest {
+class CloseDefectUseCaseTest {
     private lateinit var fakeRepository: FakeDefectRepository
     private lateinit var useCase: CloseDefectUseCase
 

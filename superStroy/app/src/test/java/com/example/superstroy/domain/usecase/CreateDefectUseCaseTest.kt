@@ -6,10 +6,10 @@ import com.example.superstroy.domain.repository.LocationProvider
 import com.example.superstroy.domain.repository.PhotoStorage
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
-import io.mockk.mockk
 import java.time.LocalDate
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull

@@ -1,31 +1,23 @@
 package com.example.superstroy.presentation.viewmodel
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.superstroy.data.repository.DefectRepositoryImpl
 import com.example.superstroy.domain.model.Defect
-import com.example.superstroy.domain.model.DefectStatus
 import com.example.superstroy.domain.usecase.CreateDefectUseCase
 import com.example.superstroy.domain.usecase.DeleteDefectUseCase
 import com.example.superstroy.domain.usecase.GetDefectsUseCase
 import com.example.superstroy.domain.usecase.SearchDefectsUseCase
 import com.example.superstroy.domain.usecase.UpdateDefectUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,6 +38,7 @@ class DefectViewModel @Inject constructor(
         loadDefects()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun loadDefects() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
@@ -72,8 +65,10 @@ class DefectViewModel @Inject constructor(
     }
 
     fun insertDefect(
-        title: String, description: String?, responsible: String, term: LocalDate,
-        latitude: Double?, longitude: Double?, photoUrl: String?
+        title: String,
+        responsible: String,
+        term: LocalDate,
+         photoUrl: String?
     ) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }

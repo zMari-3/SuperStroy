@@ -2,7 +2,6 @@ package com.example.superstroy.presentation.ui.componets.cards
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,7 +33,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.superstroy.domain.model.Defect
 import com.example.superstroy.presentation.ui.componets.badges.StatusBadge
-import com.example.superstroy.presentation.ui.theme.*
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -48,7 +46,10 @@ fun DefectCard(
     val formattedDate = defect.term.format(dateFormatter)
 
     val locationText = if (defect.latitude != null && defect.longitude != null) {
-        String.format(Locale.US, "%.4f, %.4f", defect.latitude, defect.longitude)
+        String.format(Locale.US,
+            "%.4f, %.4f",
+            defect.latitude,
+            defect.longitude)
     } else {
         "Локация не определена"
     }
@@ -58,7 +59,9 @@ fun DefectCard(
             .fillMaxWidth()
             .clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Row(
@@ -83,7 +86,9 @@ fun DefectCard(
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
-                    Icon(Icons.Default.Image, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Icon(Icons.Default.Image,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
 

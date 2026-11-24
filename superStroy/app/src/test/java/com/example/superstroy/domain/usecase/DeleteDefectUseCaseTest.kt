@@ -9,7 +9,6 @@ import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
 import java.time.LocalDateTime
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class DeleteDefectUseCaseTest {

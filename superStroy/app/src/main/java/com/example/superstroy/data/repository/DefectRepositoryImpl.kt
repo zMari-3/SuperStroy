@@ -4,7 +4,6 @@ import com.example.superstroy.data.local.DefectDao
 import com.example.superstroy.data.mapper.toDomain
 import com.example.superstroy.data.mapper.toEntity
 import com.example.superstroy.data.remote.DefectRemoteDataSource
-import com.example.superstroy.data.remote.dto.DefectApi
 import com.example.superstroy.domain.model.Defect
 import com.example.superstroy.domain.model.DefectStatus
 import com.example.superstroy.domain.repository.DefectRepository

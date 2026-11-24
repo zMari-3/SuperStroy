@@ -4,7 +4,6 @@ import com.example.superstroy.domain.model.Defect
 import com.example.superstroy.domain.repository.DefectRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import java.time.temporal.TemporalQuery
 import javax.inject.Inject
 
 class SearchDefectsUseCase @Inject constructor(

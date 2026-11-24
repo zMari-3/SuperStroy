@@ -9,7 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.superstroy.domain.model.DefectStatus
-import com.example.superstroy.presentation.ui.theme.*
+import com.example.superstroy.presentation.ui.theme.StatusClosedBg
+import com.example.superstroy.presentation.ui.theme.StatusClosedText
+import com.example.superstroy.presentation.ui.theme.StatusOpenBg
+import com.example.superstroy.presentation.ui.theme.StatusOpenText
 
 @Composable
 fun StatusBadge(status: DefectStatus, modifier: Modifier = Modifier) {

@@ -1,9 +1,9 @@
 package com.example.superstroy.data.di
 
 import retrofit2.HttpException
+import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import java.io.IOException
 
 sealed class NetworkError : Exception() {
     data object NoConnection : NetworkError()

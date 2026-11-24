@@ -3,7 +3,6 @@ package com.example.superstroy.data.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.superstroy.domain.model.Defect
 import com.example.superstroy.domain.model.DefectStatus
 import java.time.LocalDate
 import java.time.LocalDateTime

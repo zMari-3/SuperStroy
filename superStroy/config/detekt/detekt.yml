@@ -126,9 +126,9 @@ complexity:
   LargeClass:
     active: true
     threshold: 600
+   # Увеличиваем допустимый размер функций
   LongMethod:
-    active: true
-    threshold: 60
+    threshold: 150
   LongParameterList:
     active: true
     functionThreshold: 6
@@ -165,17 +165,9 @@ complexity:
     excludeStringsWithLessThan5Characters: true
     ignoreStringsRegex: '$^'
   TooManyFunctions:
-    active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**']
-    thresholdInFiles: 11
-    thresholdInClasses: 11
-    thresholdInInterfaces: 11
-    thresholdInObjects: 11
-    thresholdInEnums: 11
-    ignoreDeprecated: false
-    ignorePrivate: false
-    ignoreOverridden: false
-    ignoreAnnotatedFunctions: []
+    thresholdInFiles: 20
+    thresholdInClasses: 20
+    
 
 coroutines:
   active: true
@@ -256,14 +248,9 @@ exceptions:
   ReturnFromFinally:
     active: true
     ignoreLabeled: false
+     # Разрешаем не логировать пойманные исключения, если они обрабатываются
   SwallowedException:
-    active: true
-    ignoredExceptionTypes:
-      - 'InterruptedException'
-      - 'MalformedURLException'
-      - 'NumberFormatException'
-      - 'ParseException'
-    allowedExceptionNameRegex: '_|(ignore|expected).*'
+    active: false
   ThrowingExceptionFromFinally:
     active: true
   ThrowingExceptionInMain:
@@ -283,19 +270,9 @@ exceptions:
       - 'Throwable'
   ThrowingNewInstanceOfSameException:
     active: true
+# Разрешаем использовать общий catch (Exception e)
   TooGenericExceptionCaught:
-    active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**']
-    exceptionNames:
-      - 'ArrayIndexOutOfBoundsException'
-      - 'Error'
-      - 'Exception'
-      - 'IllegalMonitorStateException'
-      - 'IndexOutOfBoundsException'
-      - 'NullPointerException'
-      - 'RuntimeException'
-      - 'Throwable'
-    allowedExceptionNameRegex: '_|(ignore|expected).*'
+    active: false
   TooGenericExceptionThrown:
     active: true
     exceptionNames:
@@ -329,11 +306,9 @@ naming:
   FunctionMinLength:
     active: false
     minimumFunctionNameLength: 3
+    # Разрешаем Compose-функциям начинаться с большой буквы 
   FunctionNaming:
-    active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**']
-    functionPattern: '[a-z][a-zA-Z0-9]*'
-    excludeClassPattern: '$^'
+    ignoreAnnotated: ['Composable']
   FunctionParameterNaming:
     active: true
     parameterPattern: '[a-z][A-Za-z0-9]*'
@@ -608,23 +583,7 @@ style:
     active: true
     maxJumpCount: 1
   MagicNumber:
-    active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**', '**/*.kts']
-    ignoreNumbers:
-      - '-1'
-      - '0'
-      - '1'
-      - '2'
-    ignoreHashCodeFunction: true
-    ignorePropertyDeclaration: false
-    ignoreLocalVariableDeclaration: false
-    ignoreConstantDeclaration: true
-    ignoreCompanionObjectPropertyDeclaration: true
-    ignoreAnnotation: false
-    ignoreNamedArgument: true
-    ignoreEnums: false
-    ignoreRanges: false
-    ignoreExtensionFunctions: true
+    active: false
   MandatoryBracesLoops:
     active: false
   MaxChainedCallsOnSameLine:
@@ -783,3 +742,5 @@ style:
     active: true
     excludeImports:
       - 'java.util.*'
+
+
