@@ -1,5 +1,6 @@
 package com.example.superstroy.presentation.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,20 +13,38 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.superstroy.presentation.ui.componets.navigation.AppTopBar
 import com.example.superstroy.presentation.ui.theme.Dimens
+import com.example.superstroy.presentation.viewmodel.SettingsViewModel
 
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,
-    onSyncClick: () -> Unit
+    onSyncClick: () -> Unit,
+    viewModel: SettingsViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+
+    // Считываем состояния из ViewModel
+    val reminders by viewModel.remindersEnabled.collectAsState()
+    val statusChanges by viewModel.statusChangesEnabled.collectAsState()
+    val sync by viewModel.syncEnabled.collectAsState()
+    val offlineMode by viewModel.offlineModeEnabled.collectAsState()
+    val theme by viewModel.theme.collectAsState()
+
     Scaffold(
         topBar = { AppTopBar(title = "Настройки", onBackClick = onBackClick) },
         containerColor = MaterialTheme.colorScheme.background
@@ -43,11 +62,26 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(Dimens.SpaceS))
 
             SettingCard {
-                SettingSwitchRow("Напоминания о сроках", "Уведомлять о приближении срока", true)
+                SettingSwitchRow(
+                    title = "Напоминания о сроках",
+                    subtitle = "Уведомлять о приближении срока",
+                    isChecked = reminders,
+                    onCheckedChange = { viewModel.toggleReminders(it) }
+                )
                 HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant)
-                SettingSwitchRow("Изменение статуса", "Когда дефект закрыт", true)
+                SettingSwitchRow(
+                    title = "Изменение статуса",
+                    subtitle = "Когда дефект закрыт",
+                    isChecked = statusChanges,
+                    onCheckedChange = { viewModel.toggleStatusChanges(it) }
+                )
                 HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant)
-                SettingSwitchRow("Синхронизация", "Статус отправки записей", true)
+                SettingSwitchRow(
+                    title = "Синхронизация",
+                    subtitle = "Статус отправки записей",
+                    isChecked = sync,
+                    onCheckedChange = { viewModel.toggleSync(it) }
+                )
             }
 
             Spacer(modifier = Modifier.height(Dimens.SpaceXL))
@@ -56,27 +90,46 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(Dimens.SpaceS))
 
             SettingCard {
-                SettingTextRow("Тема", "Светлая")
+                SettingTextRow(
+                    title = "Тема",
+                    value = theme,
+                    onClick = {
+                        // Смена темы по клику
+                        viewModel.changeTheme(if (theme == "Светлая") "Темная" else "Светлая")
+                        Toast.makeText(context, "Тема изменена на: ${if (theme == "Светлая") "Темная" else "Светлая"}", Toast.LENGTH_SHORT).show()
+                    }
+                )
                 HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant)
-                SettingTextRow("Язык", "Русский")
+                SettingTextRow(
+                    title = "Язык",
+                    value = "Русский",
+                    onClick = { Toast.makeText(context, "Смена языка в разработке", Toast.LENGTH_SHORT).show() }
+                )
                 HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant)
-                SettingTextRow("Офлайн-режим", "Включён", valueColor = MaterialTheme.colorScheme.primary)
+                SettingTextRow(
+                    title = "Офлайн-режим",
+                    value = if (offlineMode) "Включён" else "Выключен",
+                    valueColor = if (offlineMode) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                    onClick = { viewModel.toggleOfflineMode(!offlineMode) }
+                )
                 HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant)
-                SettingTextRow("Очистить кэш", "Удалить временные данные")
+                SettingTextRow(
+                    title = "Очистить кэш",
+                    value = "Удалить временные данные",
+                    onClick = { Toast.makeText(context, "Кэш очищен", Toast.LENGTH_SHORT).show() }
+                )
             }
 
             Spacer(modifier = Modifier.height(Dimens.SpaceL))
 
-            // Кнопка перехода на экран Синхронизации
             SettingCard {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onSyncClick() } // <--- Обработчик клика
+                        .clickable { onSyncClick() } //Переход на экран синхронизации
                         .padding(Dimens.SpaceM),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Иконка в кружочке
                     Box(
                         modifier = Modifier
                             .size(40.dp)
@@ -108,9 +161,9 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(Dimens.SpaceXL))
         }
+
     }
 }
-
 
 @Composable
 fun SettingCard(content: @Composable () -> Unit) {
@@ -124,7 +177,12 @@ fun SettingCard(content: @Composable () -> Unit) {
 }
 
 @Composable
-fun SettingSwitchRow(title: String, subtitle: String, initialChecked: Boolean) {
+fun SettingSwitchRow(
+    title: String,
+    subtitle: String,
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -137,19 +195,24 @@ fun SettingSwitchRow(title: String, subtitle: String, initialChecked: Boolean) {
             Text(subtitle, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Switch(
-            checked = initialChecked,
-            onCheckedChange = { /* TODO: Сохранить настройку в DataStore */ },
+            checked = isChecked,
+            onCheckedChange = onCheckedChange,
             colors = SwitchDefaults.colors(checkedTrackColor = MaterialTheme.colorScheme.primary)
         )
     }
 }
 
 @Composable
-fun SettingTextRow(title: String, value: String, valueColor: Color = MaterialTheme.colorScheme.onSurfaceVariant) {
+fun SettingTextRow(
+    title: String,
+    value: String,
+    valueColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    onClick: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { /* TODO */ }
+            .clickable { onClick() }
             .padding(horizontal = Dimens.SpaceM, vertical = Dimens.SpaceL),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -158,4 +221,3 @@ fun SettingTextRow(title: String, value: String, valueColor: Color = MaterialThe
         Text(value, fontSize = 14.sp, color = valueColor)
     }
 }
-
