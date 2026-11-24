@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.superstroy.data.local.AppDatabase
 import com.example.superstroy.data.local.DefectDao
+import com.example.superstroy.data.local.SettingsPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,5 +39,11 @@ object DatabaseModule {
     @Singleton
     fun provideApplicationScope(): CoroutineScope {
         return CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSettingsPreferences(@ApplicationContext context: Context): SettingsPreferences {
+        return SettingsPreferences(context)
     }
 }
