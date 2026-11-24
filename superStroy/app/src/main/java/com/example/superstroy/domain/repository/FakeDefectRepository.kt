@@ -1,6 +1,5 @@
 package com.example.superstroy.domain.repository
 
-import android.R.attr.delay
 import com.example.superstroy.domain.model.Defect
 import com.example.superstroy.domain.model.DefectStatus
 import kotlinx.coroutines.delay
@@ -22,7 +21,8 @@ class FakeDefectRepository : DefectRepository {
     // Вспомогательный метод для имитации работы сети/БД
     private suspend fun simulateNetwork() {
         if (delayMillis > 0) delay(delayMillis)
-        if (shouldReturnError) throw Exception("Имитация ошибки сети")
+        if (shouldReturnError)
+            error("Имитация ошибки сети")
     }
 
     override fun getDefects(): Flow<List<Defect>> {

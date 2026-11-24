@@ -1,7 +1,5 @@
 package com.example.superstroy.domain.usecase
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.superstroy.domain.model.Defect
 import com.example.superstroy.domain.model.DefectStatus
 import com.example.superstroy.domain.repository.DefectRepository
@@ -11,7 +9,6 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 import javax.inject.Inject
-import kotlin.uuid.ExperimentalUuidApi
 
 //Обьеденяем все данные и создаем дефект
 class CreateDefectUseCase @Inject constructor(

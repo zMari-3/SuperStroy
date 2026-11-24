@@ -1,5 +1,6 @@
 package com.example.superstroy.data.di
 
+import com.example.superstroy.BuildConfig
 import com.example.superstroy.data.remote.dto.DefectApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -13,7 +14,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import com.example.superstroy.BuildConfig
 
 
 @Module

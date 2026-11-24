@@ -1,6 +1,5 @@
 package com.example.superstroy.domain.usecase
 
-import com.example.superstroy.domain.repository.FakeDefectRepository
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals

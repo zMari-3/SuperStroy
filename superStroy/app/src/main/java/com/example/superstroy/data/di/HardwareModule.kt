@@ -1,7 +1,7 @@
 package com.example.superstroy.data.di
 
-import com.example.superstroy.data.repository.PhotoStorageImpl
 import com.example.superstroy.data.repository.LocationProviderImpl
+import com.example.superstroy.data.repository.PhotoStorageImpl
 import com.example.superstroy.domain.repository.LocationProvider
 import com.example.superstroy.domain.repository.PhotoStorage
 import dagger.Binds

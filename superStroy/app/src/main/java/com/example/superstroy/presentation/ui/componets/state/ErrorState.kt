@@ -27,7 +27,7 @@ fun ErrorState(
     modifier: Modifier = Modifier
 ){
     Column(
-        modifier = Modifier.fillMaxSize().padding(Dimens.SpaceL),
+        modifier = modifier.fillMaxSize().padding(Dimens.SpaceL),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

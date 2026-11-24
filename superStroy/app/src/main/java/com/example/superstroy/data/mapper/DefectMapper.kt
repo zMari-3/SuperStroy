@@ -13,12 +13,22 @@ fun DefectDto.toDomain() = Defect(
         title = title,
         description = description,
         responsible = responsible,
-        term = try { LocalDate.parse(term) } catch (e: Exception) { LocalDate.now() },
-        createdDate = try { LocalDateTime.parse(createdDate, DateTimeFormatter.ISO_DATE_TIME) } catch (e: Exception) { LocalDateTime.now() },
+        term = try { LocalDate.parse(term)
+        } catch (e: Exception) { LocalDate.now() },
+        createdDate = try {
+                LocalDateTime.parse(
+                        createdDate,
+                        DateTimeFormatter.ISO_DATE_TIME
+                )
+        } catch (e: Exception)
+        { LocalDateTime.now()
+        },
         latitude = latitude,
         longitude = longitude,
         photoUrl = photoUrl,
-        status = try { DefectStatus.valueOf(status.uppercase()) } catch (e: Exception) { DefectStatus.OPEN }
+        status = try {
+                DefectStatus.valueOf(status.uppercase())
+        } catch (e: Exception) { DefectStatus.OPEN }
 )
 
 fun DefectEntity.toDomain() = Defect (

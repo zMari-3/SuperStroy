@@ -24,7 +24,10 @@ fun VoiceInputCircle(
         modifier = modifier
             .size(120.dp)
             .background(
-                color = if (isRecording) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.primary,
+                color = if (isRecording)
+                    MaterialTheme.colorScheme.primaryContainer
+                else
+                    MaterialTheme.colorScheme.primary,
                 shape = CircleShape
             )
             .clickable { onClick() },
@@ -34,7 +37,10 @@ fun VoiceInputCircle(
             imageVector = Icons.Default.Mic,
             contentDescription = "Запись голоса",
             modifier = Modifier.size(48.dp),
-            tint = if (isRecording) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onPrimary
+            tint = if (isRecording)
+                MaterialTheme.colorScheme.onPrimaryContainer
+            else
+                MaterialTheme.colorScheme.onPrimary
         )
     }
 }

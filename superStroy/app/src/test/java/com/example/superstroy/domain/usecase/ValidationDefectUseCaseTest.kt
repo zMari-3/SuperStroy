@@ -1,7 +1,5 @@
 package com.example.superstroy.domain.usecase
 
-import com.example.superstroy.domain.repository.FakeDefectRepository
-import io.mockk.mockk
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import org.junit.Before

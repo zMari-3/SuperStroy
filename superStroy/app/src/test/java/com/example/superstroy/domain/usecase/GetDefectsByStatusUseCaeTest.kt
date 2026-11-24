@@ -1,7 +1,6 @@
 package com.example.superstroy.domain.usecase
 
 import com.example.superstroy.domain.model.DefectStatus
-import com.example.superstroy.domain.repository.DefectRepository
 import com.example.superstroy.domain.repository.FakeDefectRepository
 import io.mockk.every
 import io.mockk.mockk
