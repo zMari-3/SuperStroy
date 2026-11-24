@@ -66,21 +66,21 @@ fun SettingsScreen(
                     title = "Напоминания о сроках",
                     subtitle = "Уведомлять о приближении срока",
                     isChecked = reminders,
-                    onCheckedChange = { viewModel.toggleReminders(it) } // <--- Работает
+                    onCheckedChange = { viewModel.toggleReminders(it) }
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant)
                 SettingSwitchRow(
                     title = "Изменение статуса",
                     subtitle = "Когда дефект закрыт",
                     isChecked = statusChanges,
-                    onCheckedChange = { viewModel.toggleStatusChanges(it) } // <--- Работает
+                    onCheckedChange = { viewModel.toggleStatusChanges(it) }
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant)
                 SettingSwitchRow(
                     title = "Синхронизация",
                     subtitle = "Статус отправки записей",
                     isChecked = sync,
-                    onCheckedChange = { viewModel.toggleSync(it) } // <--- Работает
+                    onCheckedChange = { viewModel.toggleSync(it) }
                 )
             }
 
