@@ -1,6 +1,5 @@
 package com.example.superstroy.presentation.ui.componets.inputs
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.superstroy.presentation.ui.theme.Dimens
 
 @Composable
@@ -30,12 +31,14 @@ fun PhotoThumbnailRow(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(Dimens.SpaceS)
     ) {
-        photos.forEach { _ ->
-            Box(
+        photos.forEach { uri ->
+            AsyncImage(
+                model = uri,
+                contentDescription = "Миниатюра фото",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(64.dp)
                     .clip(RoundedCornerShape(Dimens.CornerS))
-                    .background(MaterialTheme.colorScheme.surfaceVariant)
             )
         }
 

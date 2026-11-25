@@ -46,24 +46,35 @@ fun AppNavigation(
         composable(Screen.CreatePhoto.route) {
             CreatePhotoScreen(
                 onBackClick = { navController.popBackStack() },
-                onContinueClick = { navController.navigate(Screen.VoiceInput.route) }
+                onContinueClick = { photoUris ->
+                    // Берем первое фото и передаем на экран голоса
+                    val firstPhotoUri = photoUris.firstOrNull() ?: ""
+                    navController.navigate(Screen.VoiceInput.createRoute(firstPhotoUri))
+                }
             )
         }
 
-        composable(Screen.VoiceInput.route) {
+        composable(
+            route = Screen.VoiceInput.route,
+            arguments = listOf(navArgument("photoUri") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val photoUri = backStackEntry.arguments?.getString("photoUri") ?: ""
             VoiceInputScreen(
                 onBackClick = { navController.popBackStack() },
                 onStopClick = { recognizedText ->
-                    // Переходим на экран формы, передавая распознанный текст
-                    navController.navigate(Screen.NewDefect.createRoute(recognizedText))
+                    // Передаем и текст, и фото дальше
+                    navController.navigate(Screen.NewDefect.createRoute(recognizedText, photoUri))
                 }
             )
         }
 
         composable(
             route = Screen.NewDefect.route,
-            arguments = listOf(navArgument("voiceText") { defaultValue = "" })
-        ) {
+            arguments = listOf(
+                navArgument("voiceText") { defaultValue = "" },
+                navArgument("photoUri") { defaultValue = "" }
+            )
+        ) { backStackEntry ->
             NewDefectScreen(
                 onBackClick = { navController.popBackStack() },
                 onSaveClick = {

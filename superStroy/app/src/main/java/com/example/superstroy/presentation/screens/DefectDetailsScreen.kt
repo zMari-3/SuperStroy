@@ -16,27 +16,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.superstroy.domain.model.Defect
-import com.example.superstroy.domain.usecase.GetDefectByIdUseCase
 import com.example.superstroy.presentation.ui.componets.badges.StatusBadge
 import com.example.superstroy.presentation.ui.componets.button.PrimaryButton
 import com.example.superstroy.presentation.ui.componets.button.SecondaryButton
 import com.example.superstroy.presentation.ui.componets.navigation.AppTopBar
 import com.example.superstroy.presentation.ui.theme.Dimens
 import com.example.superstroy.presentation.viewmodel.DefectDetailsViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @Composable
 fun DefectDetailsScreen(

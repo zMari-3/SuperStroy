@@ -37,8 +37,8 @@ class CreateDefectUseCase @Inject constructor(
                 responsible = responsible,
                 term = term,
                 createdDate = LocalDateTime.now(),
-                latitude = location.latitude,
-                longitude = location.longitude,
+                latitude = location?.latitude,
+                longitude = location?.longitude,
                 photoUrl = localPhotoPath,
                 status = DefectStatus.OPEN
             )

@@ -21,18 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.superstroy.domain.usecase.CloseDefectUseCase
 import com.example.superstroy.presentation.ui.componets.button.PrimaryButton
 import com.example.superstroy.presentation.ui.componets.navigation.AppTopBar
 import com.example.superstroy.presentation.ui.theme.Dimens
 import com.example.superstroy.presentation.ui.theme.SuccessLight
 import com.example.superstroy.presentation.viewmodel.CloseDefectViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @Composable
 fun CloseDefectScreen(

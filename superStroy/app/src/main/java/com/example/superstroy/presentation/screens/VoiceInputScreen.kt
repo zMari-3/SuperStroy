@@ -1,5 +1,6 @@
 package com.example.superstroy.presentation.screens
 
+import android.Manifest
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -25,18 +26,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.superstroy.presentation.ui.componets.RequestPermissionWithRationale
 import com.example.superstroy.presentation.ui.componets.button.SecondaryButton
 import com.example.superstroy.presentation.ui.componets.navigation.AppTopBar
 import com.example.superstroy.presentation.ui.theme.Dimens
 import kotlinx.coroutines.delay
-import androidx.compose.ui.platform.LocalLocale
 
 @Composable
 fun VoiceInputScreen(
@@ -64,6 +67,18 @@ fun VoiceInputScreen(
         ),
         label = "pulseScale"
     )
+    var showPermissionDialog by remember { mutableStateOf(true) }
+    if (showPermissionDialog) {
+        RequestPermissionWithRationale(
+            permission = Manifest.permission.RECORD_AUDIO,
+            rationaleTitle = "Доступ к микрофону",
+            rationaleMessage = "Нам нужен микрофон, чтобы вы могли надиктовать данные о дефекте голосом.",
+            onPermissionGranted = {
+                showPermissionDialog = false
+                // Начинаем запись
+            }
+        )
+    }
 
     Scaffold(
         topBar = { AppTopBar(
