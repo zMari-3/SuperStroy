@@ -1,5 +1,7 @@
 package com.example.superstroy.presentation.screens
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,10 +16,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Settings
@@ -35,11 +37,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.superstroy.presentation.ui.componets.cards.DefectCard
 import com.example.superstroy.presentation.ui.componets.navigation.FilterChips
@@ -55,7 +62,13 @@ fun MainScreen(
     viewModel: DefectViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-
+//    val context = LocalContext.current
+//    var hasLocationPermission by remember {
+//        mutableStateOf(
+//            checkSelfPermission(context,
+//                Manifest.permission.ACCESS_FINE_LOCATION)
+//                    == PackageManager.PERMISSION_GRANTED)
+//    }
     Scaffold(
         topBar = {
             Row(
@@ -103,18 +116,18 @@ fun MainScreen(
                 .padding(horizontal = Dimens.SpaceL)
         ) {
             OutlinedTextField(
-                value = "",
+                value = uiState.searchQuery,
                 onValueChange = { viewModel.onSearchQueryChange(it) },
                 placeholder = {
-                    Text(
-                        "Поиск дефектов...",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    ) },
+                    Text("Поиск дефектов...",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                },
                 leadingIcon = {
                     Icon(
                         Icons.Default.Search,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -132,8 +145,8 @@ fun MainScreen(
             Spacer(modifier = Modifier.height(Dimens.SpaceM))
 
             FilterChips(
-                selectedFilter = "Все",
-                onFilterSelected = { /* TODO */ }
+                selectedFilter = uiState.selectedFilter,
+                onFilterSelected = { viewModel.onFilterSelected(it) }
             )
 
             Spacer(modifier = Modifier.height(Dimens.SpaceL))
@@ -141,6 +154,14 @@ fun MainScreen(
             if (uiState.isLoading) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                }
+            } else if (uiState.emptyMessage != null) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(
+                        text = uiState.emptyMessage ?: "Пусто",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
             } else {
                 LazyColumn(

@@ -13,10 +13,17 @@ class LocationProviderImpl @Inject constructor (
 ): LocationProvider {
 
     @SuppressLint("MissingPermission")
-    override suspend fun getCurrentLocation(): GeoLocation {
+    override suspend fun getCurrentLocation(): GeoLocation? {
         return try {
             val locationManager =
                 context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+            // Проверяем, включен ли GPS вообще
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) &&
+                !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                return null // GPS выключен пользователем
+            }
+
             // Пытаемся получить последнюю известную локацию (если есть разрешение)
             val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                 ?: locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
@@ -24,12 +31,12 @@ class LocationProviderImpl @Inject constructor (
             if (location != null) {
                 GeoLocation(location.latitude, location.longitude)
             } else {
-                // Заглушка, если координат нет
-                GeoLocation(0.0, 0.0)
+                null
             }
         } catch (e: SecurityException) {
-            // Если нет разрешения, возвращаем заглушку
-            GeoLocation(0.0, 0.0)
+            null
+        } catch (e: SecurityException) {
+            null
         }
     }
 }

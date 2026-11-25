@@ -2,50 +2,59 @@ package com.example.superstroy.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.superstroy.domain.model.Defect
-import com.example.superstroy.domain.usecase.CreateDefectUseCase
-import com.example.superstroy.domain.usecase.DeleteDefectUseCase
+import com.example.superstroy.domain.model.DefectStatus
 import com.example.superstroy.domain.usecase.GetDefectsUseCase
 import com.example.superstroy.domain.usecase.SearchDefectsUseCase
-import com.example.superstroy.domain.usecase.UpdateDefectUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
 class DefectViewModel @Inject constructor(
     private val getDefectsUseCase: GetDefectsUseCase,
-    private val searchDefectsUseCase: SearchDefectsUseCase,
-    private val updateDefectUseCase: UpdateDefectUseCase,
-    private val deleteDefectUseCase: DeleteDefectUseCase,
-    private val createDefectUseCase: CreateDefectUseCase
+    private val searchDefectsUseCase: SearchDefectsUseCase
 ): ViewModel(){
 
     private val _uiState = MutableStateFlow(DefectUiState())
     val uiState: StateFlow<DefectUiState> = _uiState.asStateFlow()
 
     private val searchQuery = MutableStateFlow("")
+    private val selectedFilter = MutableStateFlow("Все")
 
     init {
-        loadDefects()
+        observeDefects()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    fun loadDefects() {
+    private fun observeDefects() {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+            combine(searchQuery, selectedFilter) { query, filter ->
+                Pair(query, filter)
+            }.flatMapLatest { (query, filter) ->
+                _uiState.update { it.copy(isLoading = true, errorMessage = null) }
 
-            // Подписываемся на поиск или на получение всех дефектов
-            searchQuery.flatMapLatest { query ->
-                if (query.isBlank()) getDefectsUseCase() else searchDefectsUseCase(query)
+                // Выбираем источник данных: поиск или все дефекты
+                val sourceFlow = if (query.isBlank()) {
+                    getDefectsUseCase()
+                } else {
+                    searchDefectsUseCase(query)
+                }
+
+                // Применяем фильтр по статусу
+                sourceFlow.map { list ->
+                    when (filter) {
+                        "Открытые" -> list.filter { it.status == DefectStatus.OPEN }
+                        "Закрытые" -> list.filter { it.status == DefectStatus.CLOSED }
+                        else -> list
+                    }
+                }
             }.catch { e ->
                 _uiState.update { it.copy(isLoading = false, errorMessage = e.message ?: "Ошибка загрузки") }
             }.collect { defects ->
@@ -53,7 +62,9 @@ class DefectViewModel @Inject constructor(
                     it.copy(
                         defects = defects,
                         isLoading = false,
-                        emptyMessage = if (defects.isEmpty()) "Дефектов пока нет" else null
+                        emptyMessage = if (defects.isEmpty()) {
+                            if (searchQuery.value.isNotBlank()) "Ничего не найдено" else "Дефектов пока нет"
+                        } else null
                     )
                 }
             }
@@ -61,38 +72,12 @@ class DefectViewModel @Inject constructor(
     }
 
     fun onSearchQueryChange(query: String) {
+        _uiState.update { it.copy(searchQuery = query) }
         searchQuery.value = query
     }
 
-    fun insertDefect(
-        title: String,
-        responsible: String,
-        term: LocalDate,
-         photoUrl: String?
-    ) {
-        viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
-            val result = createDefectUseCase(title, responsible, term, photoUrl)
-            if (result != null) {
-                loadDefects() // Перезагружаем список
-            } else {
-                _uiState.update { it.copy(isLoading = false, errorMessage = "Не удалось создать дефект") }
-            }
-        }
+    fun onFilterSelected(filter: String) {
+        _uiState.update { it.copy(selectedFilter = filter) }
+        selectedFilter.value = filter
     }
-
-    fun updateDefect(defect: Defect) {
-        viewModelScope.launch {
-            val isSuccess = updateDefectUseCase(defect)
-            if (isSuccess) loadDefects()
-        }
-    }
-
-    fun deleteDefect(defect: Defect) {
-        viewModelScope.launch {
-            val isSuccess = deleteDefectUseCase(defect)
-            if (isSuccess) loadDefects()
-        }
-    }
-
 }

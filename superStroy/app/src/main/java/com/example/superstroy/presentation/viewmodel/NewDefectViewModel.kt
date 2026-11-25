@@ -32,8 +32,17 @@ class NewDefectViewModel @Inject constructor(
     var errorMessage by mutableStateOf<String?>(null)
     var isSaving by mutableStateOf(false)
 
+    var tempPhotoUri by mutableStateOf<String?>(null)
+        private set
+
     init {
         val voiceText = savedStateHandle.get<String>("voiceText") ?: ""
+        val photoUri = savedStateHandle.get<String>("photoUri") ?: ""
+
+        if (photoUri.isNotBlank()) {
+            tempPhotoUri = photoUri
+        }
+
         if (voiceText.isNotBlank()) {
             val parsed = parseVoiceCommandUseCase(voiceText)
             if (parsed != null) {
@@ -67,12 +76,11 @@ class NewDefectViewModel @Inject constructor(
                 LocalDate.now()
             }
 
-            // Предполагаем, что координаты фиксированные (заглушка)
             val result = createDefectUseCase(
                 title = title,
                 responsible = responsible,
                 term = parsedDate,
-                tempPhotoUri = null // Позже добавить сюда реальный Uri
+                tempPhotoUri = tempPhotoUri
             )
 
             isSaving = false
@@ -82,6 +90,9 @@ class NewDefectViewModel @Inject constructor(
                 errorMessage = "Не удалось сохранить дефект"
             }
         }
+    }
+    fun setPhotoUri(uri: String) {
+        this.tempPhotoUri = uri
     }
 }
 

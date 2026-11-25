@@ -8,5 +8,7 @@ data class DefectUiState(
     val emptyMessage: String? = null,
     val offlineMessage: String? = null,
     val permissionMessage: String? = null,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val searchQuery: String = "",
+    val selectedFilter: String = "Все"
 )

@@ -7,5 +7,5 @@ data class GeoLocation(
 
 //Получаем координаты
 interface LocationProvider {
-    suspend fun getCurrentLocation(): GeoLocation
+    suspend fun getCurrentLocation(): GeoLocation?
 }
