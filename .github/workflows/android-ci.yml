@@ -32,3 +32,4 @@ jobs:
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug --stacktrace
         working-directory: ./superStroy
+
