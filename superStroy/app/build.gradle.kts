@@ -108,4 +108,12 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
 
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // WorkManager
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+// Hilt для WorkManager
+    implementation("androidx.hilt:hilt-work:1.2.0")
+    ksp("androidx.hilt:hilt-compiler:1.2.0")
+
+    implementation("com.google.errorprone:error_prone_annotations:2.23.0")
 }

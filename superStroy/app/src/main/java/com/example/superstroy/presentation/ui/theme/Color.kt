@@ -18,7 +18,7 @@ val OnSurfaceLight = Color(0xFF1A202C)
 val SurfaceVariantLight = Color(0xFFDCE5F0)
 val OnSurfaceVariantLight = Color(0xFF6B7A90)
 
-val ErrorLight = Color(0xFFC47A00) // Ваш цвет ошибки
+val ErrorLight = Color(0xFF172033)
 val SuccessLight = Color(0xFF16804A)
 
 // --- Темная тема ---

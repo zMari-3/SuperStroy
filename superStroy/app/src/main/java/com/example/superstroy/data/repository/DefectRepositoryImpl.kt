@@ -2,8 +2,10 @@ package com.example.superstroy.data.repository
 
 import com.example.superstroy.data.local.DefectDao
 import com.example.superstroy.data.mapper.toDomain
+import com.example.superstroy.data.mapper.toDto
 import com.example.superstroy.data.mapper.toEntity
 import com.example.superstroy.data.remote.DefectRemoteDataSource
+import com.example.superstroy.data.worker.SyncScheduler
 import com.example.superstroy.domain.model.Defect
 import com.example.superstroy.domain.model.DefectStatus
 import com.example.superstroy.domain.repository.DefectRepository
@@ -17,6 +19,7 @@ import javax.inject.Inject
 class DefectRepositoryImpl @Inject constructor(
     private val dao: DefectDao,
     private val remote: DefectRemoteDataSource,
+    private val syncScheduler: SyncScheduler,
     private val externalScope: CoroutineScope
 ): DefectRepository {
 
@@ -39,17 +42,18 @@ class DefectRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insert(defect: Defect) {
+        //Сохраняем локально
         val entity = defect.toEntity(isSynced = false)
         dao.insertDefect(entity)
 
-        // Пытаемся отправить на сервер в фоне
-        externalScope.launch {
+        //Пытаемся отправить на сервер
+        externalScope.launch(Dispatchers.IO) {
             try {
-                // Если успешно, помечаем как синхронизированный
+                remote.insertDefect(entity.toDomain().toDto())
                 dao.updateDefect(entity.copy(isSynced = true))
             } catch (e: Exception) {
-                // Если ошибка, запись остается в Room с isSynced = false
-                // При следующем запуске приложения она попробует отправиться снова
+                // Если ошибка сети — WorkManager отправит позже
+                syncScheduler.scheduleSync()
             }
         }
     }
@@ -57,10 +61,27 @@ class DefectRepositoryImpl @Inject constructor(
     override suspend fun update(defect: Defect) {
         val entity = defect.toEntity(isSynced = false)
         dao.updateDefect(entity)
+        externalScope.launch(Dispatchers.IO) {
+            try {
+                remote.updateDefect(defect.id, defect.toDto())
+                dao.updateDefect(entity.copy(isSynced = true))
+            } catch (e: Exception) {
+                syncScheduler.scheduleSync()
+            }
+        }
     }
 
     override suspend fun delete(defect: Defect) {
         dao.deleteDefectById(defect.id)
+        externalScope.launch(Dispatchers.IO) {
+            try {
+                remote.deleteDefect(defect.id)
+                dao.deleteDefectById(defect.id)
+            } catch (e: Exception) {
+                // В реальности здесь нужно помечать на удаление (soft delete)
+            }
+        }
+
     }
 
     override suspend fun addCoverImage(
@@ -76,8 +97,18 @@ class DefectRepositoryImpl @Inject constructor(
     ) {
         val existingEntity = dao.getDefectById(defectId)
         if (existingEntity != null) {
-            val updated = existingEntity.copy(status = status, isSynced = false)
-            dao.updateDefect(updated)
+            val updatedEntity = existingEntity.copy(status = status, isSynced = false)
+            dao.updateDefect(updatedEntity)
+
+            // Пытаемся отправить на сервер
+            externalScope.launch(Dispatchers.IO) {
+                try {
+                    remote.updateDefect(defectId, updatedEntity.toDomain().toDto())
+                    dao.updateDefect(updatedEntity.copy(isSynced = true))
+                } catch (e: Exception) {
+                    syncScheduler.scheduleSync() // Если нет сети, отправим позже
+                }
+            }
         }
     }
 
@@ -95,11 +126,25 @@ class DefectRepositoryImpl @Inject constructor(
 
                 // Маппим DTO -> Entity и сохраняем в Room
                 // isSynced = true, так как эти данные пришли с сервера
-                val entities = remoteDefects.map { it.toDomain().toEntity(isSynced = true) }
+                val entities = remoteDefects.map {
+                    it.toDomain().toEntity(isSynced = true)
+                }
                 dao.insertDefects(entities)
 
             } catch (e: Exception) {
                 // Если сети нет, ничего не делаем (данные останутся из кэша Room)
+            }
+        }
+    }
+
+    override suspend fun syncPendingDefects() {
+        val unsynced = dao.getUnsyncedDefects()
+        for (entity in unsynced) {
+            try {
+                remote.insertDefect(entity.toDomain().toDto())
+                dao.updateDefect(entity.copy(isSynced = true))
+            } catch (e: Exception) {
+                // Если не удалось, оставляем в базе
             }
         }
     }

@@ -106,8 +106,7 @@ fun AppNavigation(
 
         composable(Screen.Sync.route) {
             SyncScreen(
-                onBackClick = { navController.popBackStack() },
-                onSyncClick = { /* Логика синхронизации */ }
+                onBackClick = { navController.popBackStack() }
             )
         }
 

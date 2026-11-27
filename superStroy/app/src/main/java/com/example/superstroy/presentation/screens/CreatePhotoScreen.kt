@@ -54,7 +54,7 @@ fun CreatePhotoScreen(
 ) {
     val context = LocalContext.current
 
-    // Стейт для хранения выбранных/сделанных фото (храним строковые URI)
+    // Стейт для хранения выбранных/сделанных фото
     var photoUris by rememberSaveable { mutableStateOf(arrayListOf<String>()) }
 
     // Стейт для временного URI камеры (куда сохранится фото)
@@ -62,7 +62,7 @@ fun CreatePhotoScreen(
 
     var showPermissionDialog by remember { mutableStateOf(false) }
 
-    //Лаунчер для КАМЕРЫ
+    //Лаунчер для камеры
     val cameraLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture()
     ) { success ->
@@ -73,7 +73,7 @@ fun CreatePhotoScreen(
         }
     }
 
-    //Лаунчер для ГАЛЕРЕИ (Photo Picker - современный стандарт)
+    //Лаунчер для галереи (Photo Picker)
     val galleryLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia()
     ) { uri ->
