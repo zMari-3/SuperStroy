@@ -3,7 +3,6 @@ package com.example.superstroy.presentation.ui.componets.state
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -27,7 +26,7 @@ fun EmptyState(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize().padding(Dimens.SpaceL),
+        modifier = modifier.fillMaxWidth().padding(Dimens.SpaceXL),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -44,6 +43,7 @@ fun EmptyState(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+        Spacer(modifier = Modifier.height(Dimens.SpaceXL))
         Spacer(modifier = Modifier.height(Dimens.SpaceXL))
         PrimaryButton(text = "Создать дефект", onClick = onCreate, modifier = Modifier.fillMaxWidth(0.6f))
 

@@ -14,7 +14,8 @@ data class Defect @OptIn(ExperimentalUuidApi::class) constructor(
     val latitude: Double?,
     val longitude: Double?,
     val photoUrl: String?,
-    val status: DefectStatus
+    val status: DefectStatus,
+    val isSynced: Boolean = false
 )
 
 enum class DefectStatus{

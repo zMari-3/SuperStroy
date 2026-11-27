@@ -1,9 +1,6 @@
 package com.example.superstroy.presentation.screens
 
-import android.Manifest
-import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -23,7 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
@@ -37,19 +33,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.superstroy.presentation.ui.componets.cards.DefectCard
 import com.example.superstroy.presentation.ui.componets.navigation.FilterChips
+import com.example.superstroy.presentation.ui.componets.state.AppModal
+import com.example.superstroy.presentation.ui.componets.state.EmptyState
+import com.example.superstroy.presentation.ui.componets.state.ErrorState
+import com.example.superstroy.presentation.ui.componets.state.LoadingState
+import com.example.superstroy.presentation.ui.componets.state.OfflineState
 import com.example.superstroy.presentation.ui.theme.Dimens
 import com.example.superstroy.presentation.viewmodel.DefectViewModel
 
@@ -62,13 +58,7 @@ fun MainScreen(
     viewModel: DefectViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-//    val context = LocalContext.current
-//    var hasLocationPermission by remember {
-//        mutableStateOf(
-//            checkSelfPermission(context,
-//                Manifest.permission.ACCESS_FINE_LOCATION)
-//                    == PackageManager.PERMISSION_GRANTED)
-//    }
+
     Scaffold(
         topBar = {
             Row(
@@ -152,18 +142,35 @@ fun MainScreen(
             Spacer(modifier = Modifier.height(Dimens.SpaceL))
 
             if (uiState.isLoading) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                AppModal {
+                    LoadingState(loadMessage = "Загружаем данные...")
                 }
-            } else if (uiState.emptyMessage != null) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = uiState.emptyMessage ?: "Пусто",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+            } else if (uiState.offlineMessage != null) {
+                AppModal {
+                    OfflineState(
+                        onOff = { viewModel.dismissOfflineMode() }
                     )
                 }
-            } else {
+            } else if (uiState.errorMessage != null) {
+                AppModal {
+                    ErrorState(
+                        errorMessage = uiState.errorMessage ?: "Не удалось получить данные.\n" +
+                        "Проверьте соединение и\n" +
+                        "попробуйте ещё раз.",
+                        onRetry = { viewModel.loadDefects() }
+                    )
+                }
+            } else if (uiState.defects.isEmpty() && !uiState.isLoading) {
+                AppModal {
+                    EmptyState(
+                        emptyMessage = uiState.emptyMessage ?: "Список пуст. Создайте первую\n" +
+                        "запись о дефекте, чтобы она\n" +
+                        "появилась здесь.",
+                        onCreate = onCreateDefectClick
+                    )
+                }
+            }
+            else {
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(Dimens.SpaceM),
                     contentPadding = PaddingValues(bottom = 100.dp)

@@ -89,6 +89,10 @@ class FakeDefectRepository : DefectRepository {
         }
     }
 
+    override suspend fun syncPendingDefects() {
+        if (delayMillis > 0) delay(delayMillis)
+    }
+
 
     fun setDefects(defects: List<Defect>) {
         defectsFlow.value = defects
